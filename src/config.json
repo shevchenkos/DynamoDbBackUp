@@ -1,0 +1,12 @@
+{
+    "S3": {
+        "bucket": "*",
+        "prefix": "*",
+        "region": "*"
+    },
+    "Db": {
+        "table": "*",
+        "region": "*"
+    },
+    "RestoreTime": ""
+}

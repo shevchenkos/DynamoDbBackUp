@@ -5,3 +5,22 @@ This is tool to back up DynamoDb table to S3 bucket and restore S3 objects to Dy
 This tool looks like many other but has a great advantage - implemented with classes and ES6.
 
 This tool requires to set all parameters except Restore Time.
+
+
+###Usage sample from AWS Lambda
+```
+module.exports.handler = (event, context, callback) => {
+    let config = {
+        S3Bucket: 'STRING_VALUE', /* required */
+        S3Region: 'STRING_VALUE', /* required */
+        S3Prefix: 'STRING_VALUE', /* required */
+    };
+​
+    let backupRecords = new BackupRecords(config);
+    return backupRecords.fromDbStream(event.Records).then(() => {
+        callback();
+    }).catch(err => {
+        callback(err);
+    });
+}
+```

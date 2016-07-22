@@ -3,11 +3,14 @@
 const AWS = require('aws-sdk');
 const DbRecord = require('./core/dbRecord');
 const DbStreamData = require('./core/dbStreamData');
+const DbInstanceData = require('./core/dbInstanceData');
+
 
 class Backup {
     constructor(config) {
         this.dbRecord = new DbRecord(config);
         this.dbStreamData = new DbStreamData(config);
+        this.dbInstanceData = new DbInstanceData(config);
     }
 
     fromDbStream(records) {
@@ -33,6 +36,17 @@ class Backup {
             });
     }
 
+    fromDbInstance(records) {
+        let promises = [];
+        records.forEach(record => {
+            promises.push(this.dbRecord.backup([record]));
+        });
+        return Promise.all(promises)
+            .catch(err => {
+                throw err;
+            });
+    }
+
     incremental() {
         return this.dbStreamData.retrieve()
             .then(records => {
@@ -44,7 +58,13 @@ class Backup {
     }
 
     full() {
-
+        return this.dbInstanceData.retrieve()
+            .then(records => {
+                this.fromDbInstance(records);
+            })
+            .catch(err => {
+                throw err;
+            });
     }
 }
 

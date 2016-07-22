@@ -17,7 +17,7 @@ module.exports.handler = (event, context, callback) => {
     };
 ​
     let backup = new Backup(config);
-    return backupRecords.fromDbStream(event.Records).then(() => {
+    return backup.fromDbStream(event.Records).then(() => {
         callback();
     }).catch(err => {
         callback(err);

@@ -16,7 +16,7 @@ module.exports.handler = (event, context, callback) => {
         S3Prefix: 'STRING_VALUE', /* required */
     };
 ​
-    let backupRecords = new BackupRecords(config);
+    let backup = new Backup(config);
     return backupRecords.fromDbStream(event.Records).then(() => {
         callback();
     }).catch(err => {

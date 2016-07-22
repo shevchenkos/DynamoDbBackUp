@@ -2,13 +2,13 @@
 
 const AWS = require('aws-sdk');
 
-class IncrementalBackup {
+class DbStreamData {
     constructor(config) {
         this.DbTable = config.DbTable;
         this.DbRegion = config.DbRegion;
     }
 
-    getRecordsList() {
+    retrieve() {
         return this.getStreamArn()
             .then(sreamArn => {
                 return this.getStreamShards(sreamArn)
@@ -18,9 +18,9 @@ class IncrementalBackup {
                     .then(iterators => {
                         return this.getRecords(iterators);
                     })
-                    .then(records => {
-                        console.log(records);
-                    })
+                    .catch(err => {
+                        throw err;
+                    });
             })
             .catch(err => {
                 throw err;
@@ -29,7 +29,7 @@ class IncrementalBackup {
 
     getStreamArn() {
         return new Promise((resolve, reject) => {
-            var dynamodb = new AWS.DynamoDB({ region:this.DbRegion });
+            var dynamodb = new AWS.DynamoDB({ region: this.DbRegion });
             var params = {
                 TableName: this.DbTable
             };
@@ -76,7 +76,7 @@ class IncrementalBackup {
 
     getShardIterator(shardId, streamArn) {
         return new Promise((resolve, reject) => {
-            var dynamodbstreams = new AWS.DynamoDBStreams({ region:this.DbRegion });
+            var dynamodbstreams = new AWS.DynamoDBStreams({ region: this.DbRegion });
             var params = {
                 ShardId: shardId,
                 ShardIteratorType: 'TRIM_HORIZON',
@@ -99,7 +99,14 @@ class IncrementalBackup {
             promises.push(this.getRecord(iterator));
         });
 
-        return Promise.all(promises);
+        return Promise.all(promises)
+            .then(recordsList => {
+                let records = [];
+                recordsList.forEach(items => {
+                    records = records.concat(items);
+                });
+                return records;
+            })
     }
 
     getRecord(iterator) {
@@ -119,12 +126,12 @@ class IncrementalBackup {
                         records.push(item);
                     });
 
-                    if (data.NextShardIterator) {
-                        data.ShardIterator = data.NextShardIterator;
-                        recursiveCall.call(this, params);
-                    } else {
-                        resolve(records);
-                    }
+                    // if (data.NextShardIterator) {
+                    //     params.ShardIterator = data.NextShardIterator;
+                    //     recursiveCall.call(this, params);
+                    // } else {
+                    resolve(records);
+                    // }
                 });
             }
 
@@ -133,4 +140,4 @@ class IncrementalBackup {
     }
 }
 
-module.exports = IncrementalBackup;
+module.exports = DbStreamData;

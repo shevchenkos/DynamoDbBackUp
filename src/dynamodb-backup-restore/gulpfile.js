@@ -2,7 +2,7 @@
 
 const Config = require('./config.json');
 const gulp = require('gulp');
-const restore = require('./core/index');
+const restore = require('./restore');
 const Backup = require('./backup');
 
 gulp.task('restore', (cb) => {

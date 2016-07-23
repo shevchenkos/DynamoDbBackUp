@@ -1,24 +1,14 @@
 'use strict';
 
-let Config = require('./../config.json');
 let VersionList = require('./versionList.js');
 let RestoreDynamoDb = require('./restoreDynamoDb.js');
 let _ = require('lodash');
 
 
-function restore() {
-    let config = {
-        S3Bucket: Config.S3.bucket,
-        S3Prefix: Config.S3.prefix,
-        S3Region: Config.S3.region,
-        DbTable: Config.Db.table,
-        DbRegion: Config.Db.region,
-        RestoreTime: Config.RestoreTime || new Date()
-    };
-
+function restore(config) {
     return new Promise((resolve, reject) => {
-        for(let key in config) {
-             if (_.isEmpty(config[key].toString())){
+        for (let key in config) {
+            if (_.isEmpty(config[key].toString())) {
                 return reject(`Missing ${key} in config`);
             }
         }

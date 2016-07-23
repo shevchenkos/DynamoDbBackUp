@@ -6,7 +6,16 @@ const restore = require('./restore');
 const Backup = require('./backup');
 
 gulp.task('restore', (cb) => {
-    restore()
+    let config = {
+        S3Bucket: Config.S3.bucket,
+        S3Prefix: Config.S3.prefix,
+        S3Region: Config.S3.region,
+        DbTable: Config.Db.table,
+        DbRegion: Config.Db.region,
+        RestoreTime: Config.RestoreTime || new Date()
+    };
+    
+    restore(config)
         .then(() => {
             cb(null);
         })

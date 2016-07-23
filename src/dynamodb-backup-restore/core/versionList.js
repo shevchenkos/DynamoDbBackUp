@@ -4,10 +4,10 @@ const AWS = require('aws-sdk');
 
 class VersionList {
     constructor(config) {
-        this.restoreToPointInTime = config.RestoreTime;
-        this.Bucket = config.S3Bucket;
-        this.Prefix = config.S3Prefix;
-        this.Region = config.S3Region;
+        this.RestoreTime = config.RestoreTime;
+        this.S3Bucket = config.S3Bucket;
+        this.S3Prefix = config.S3Prefix;
+        this.S3Region = config.S3Region;
     }
 
     getVersions() {
@@ -35,8 +35,8 @@ class VersionList {
     getAllVersions() {
         return new Promise((resolve, reject) => {
             let s3DataContents = [];
-            let params = { Bucket: this.Bucket, Prefix: this.Prefix };
-            let s3 = new AWS.S3({ region: this.Region, signatureVersion: "v4" });
+            let params = { Bucket: this.S3Bucket, Prefix: this.S3Prefix };
+            let s3 = new AWS.S3({ region: this.S3Region, signatureVersion: "v4" });
             function recursiveCall(params) {
                 s3.listObjectVersions(params, (err, data) => {
                     if (err) {
@@ -68,7 +68,7 @@ class VersionList {
         return new Promise(resolve => {
             function filterData(versions) {
                 return versions.filter(version => {
-                    let diff = this.restoreToPointInTime - new Date(version.LastModified);
+                    let diff = this.RestoreTime - new Date(version.LastModified);
                     return (diff >= 0) ? true : false;
                 });
             }
@@ -88,7 +88,7 @@ class VersionList {
     versionListCreatedAfterGivenTime(versionList, allObjectVersions) {
         return new Promise(resolve => {
             allObjectVersions.forEach(data => {
-                let diff = this.restoreToPointInTime - new Date(data.LastModified);
+                let diff = this.RestoreTime - new Date(data.LastModified);
                 if (diff < 0 && !(data.Key in versionList)) {
                     versionList[data.Key] = data;
                     versionList[data.Key].DeletedMarker = true;

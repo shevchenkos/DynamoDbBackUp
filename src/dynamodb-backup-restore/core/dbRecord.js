@@ -5,9 +5,9 @@ const crypto = require('crypto');
 
 class DbRecord {
     constructor(config) {
-        this.Bucket = config.S3Bucket;
-        this.Region = config.S3Region;
-        this.Prefix = config.S3Prefix;
+        this.S3Bucket = config.S3Bucket;
+        this.S3Region = config.S3Region;
+        this.S3Prefix = config.S3Prefix;
     }
 
     backup(changes) {
@@ -20,15 +20,15 @@ class DbRecord {
 
     backupChange(change) {
         return new Promise((resolve, reject) => {
-            let s3 = new AWS.S3({ region: this.Region, signatureVersion: "v4" });
+            let s3 = new AWS.S3({ region: this.S3Region, signatureVersion: "v4" });
 
             let id = crypto.createHash('md5')
                 .update(change.keys)
                 .digest('hex');
-            let key = [this.Prefix, id].join('/');
+            let key = [this.S3Prefix, id].join('/');
 
             let params = {
-                Bucket: this.Bucket,
+                Bucket: this.S3Bucket,
                 Key: key
             };
 

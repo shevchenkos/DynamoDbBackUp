@@ -1,7 +1,7 @@
 'use strict';
 
-let VersionList = require('./versionList.js');
-let RestoreDynamoDb = require('./restoreDynamoDb.js');
+let VersionList = require('./core/versionList');
+let RestoreDynamoDb = require('./core/restoreDynamoDb');
 let _ = require('lodash');
 
 

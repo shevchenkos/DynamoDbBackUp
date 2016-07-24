@@ -1,20 +1,20 @@
 'use strict';
 
-const Config = require('./config.json');
 const gulp = require('gulp');
+const argv = require('yargs').argv;
 const restore = require('./restore');
 const Backup = require('./backup');
 
 gulp.task('restore', (cb) => {
     let config = {
-        S3Bucket: Config.S3.bucket,
-        S3Prefix: Config.S3.prefix,
-        S3Region: Config.S3.region,
-        DbTable: Config.Db.table,
-        DbRegion: Config.Db.region,
-        RestoreTime: Config.RestoreTime || new Date()
+        S3Bucket: argv.s3bucket,
+        S3Prefix: argv.s3prefix,
+        S3Region: argv.s3region,
+        DbTable: argv.dbtable,
+        DbRegion: argv.dbregion,
+        RestoreTime: argv.restoretime || new Date()
     };
-    
+
     restore(config)
         .then(() => {
             cb(null);
@@ -24,13 +24,13 @@ gulp.task('restore', (cb) => {
         });
 });
 
-gulp.task('incremental-backup', (cb) => {
+gulp.task('backup-incremental', (cb) => {
     let config = {
-        S3Bucket: Config.S3.bucket,
-        S3Prefix: Config.S3.prefix,
-        S3Region: Config.S3.region,
-        DbTable: Config.Db.table,
-        DbRegion: Config.Db.region,
+        S3Bucket: argv.s3bucket,
+        S3Prefix: argv.s3prefix,
+        S3Region: argv.s3region,
+        DbTable: argv.dbtable,
+        DbRegion: argv.dbregion
     };
 
     let backup = new Backup(config);
@@ -43,13 +43,13 @@ gulp.task('incremental-backup', (cb) => {
         });
 });
 
-gulp.task('full-backup', (cb) => {
+gulp.task('backup-full', (cb) => {
     let config = {
-        S3Bucket: Config.S3.bucket,
-        S3Prefix: Config.S3.prefix,
-        S3Region: Config.S3.region,
-        DbTable: Config.Db.table,
-        DbRegion: Config.Db.region,
+        S3Bucket: argv.s3bucket,
+        S3Prefix: argv.s3prefix,
+        S3Region: argv.s3region,
+        DbTable: argv.dbtable,
+        DbRegion: argv.dbregion
     };
 
     let backup = new Backup(config);

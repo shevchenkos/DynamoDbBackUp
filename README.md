@@ -7,7 +7,16 @@ This tool looks like many other but has a great advantage - implemented with cla
 This tool requires to set all parameters except Restore Time.
 
 
-###Usage sample from AWS Lambda
+##Usage samples
+### Full backup
+```
+$ gulp backup-full --s3bucket s3-bucket --s3prefix s3-prefix --s3region s3-region --dbtable db-name --dbregion db-region
+```
+### Incremental backup
+```
+$ gulp backup-incremental --s3bucket s3-bucket --s3prefix s3-prefix --s3region s3-region --dbtable db-name --dbregion db-region
+```
+### AWS Lambda
 ```
 module.exports.handler = (event, context, callback) => {
     let config = {
@@ -15,7 +24,7 @@ module.exports.handler = (event, context, callback) => {
         S3Region: 'STRING_VALUE', /* required */
         S3Prefix: 'STRING_VALUE', /* required */
     };
-​
+    
     let backup = new Backup(config);
     return backup.fromDbStream(event.Records).then(() => {
         callback();
@@ -24,3 +33,8 @@ module.exports.handler = (event, context, callback) => {
     });
 }
 ```
+### Restore
+```
+$ gulp restore --s3bucket s3-bucket --s3prefix s3-prefix --s3region s3-region --dbtable db-name --dbregion db-region
+```
+

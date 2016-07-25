@@ -1,9 +1,9 @@
 {
   "name": "dynamodb-backup-restore",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "AWS DynamoDb tool for full, incremental backup and restore",
   "homepage": "https://github.com/Purple-Unicorns/DynamoDbBackUp",
-  "main": "gulpfile.js",
+  "main": "index.js",
   "author": "Purple-Unicorns",
   "license": "MIT",
   "repository": {

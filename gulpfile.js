@@ -2,8 +2,8 @@
 
 const gulp = require('gulp');
 const argv = require('yargs').argv;
-const restore = require('./restore');
-const Backup = require('./backup');
+const Restore = require('./lib/restore');
+const Backup = require('./lib/backup');
 
 gulp.task('restore', (cb) => {
     let config = {
@@ -15,7 +15,7 @@ gulp.task('restore', (cb) => {
         RestoreTime: argv.restoretime || new Date()
     };
 
-    restore(config)
+    Restore(config)
         .then(() => {
             cb(null);
         })

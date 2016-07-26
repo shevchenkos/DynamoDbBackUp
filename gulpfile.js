@@ -4,6 +4,7 @@ const gulp = require('gulp');
 const argv = require('yargs').argv;
 const Restore = require('./lib/restore');
 const Backup = require('./lib/backup');
+const jasmine = require('gulp-jasmine');
 
 gulp.task('restore', (cb) => {
     let config = {
@@ -60,4 +61,27 @@ gulp.task('backup-full', (cb) => {
         .catch(err => {
             cb(err);
         });
+});
+let process = require('process');
+
+gulp.task('unit-test', (cb) =>{
+    return gulp.src([
+        './tests/*.js'
+    ])
+    .pipe(jasmine({
+        timeout: 40000,
+        verbose: true,
+        integration: true,
+        abortOnTestFailure: true
+    }))
+    .on('done', function (result) {
+        if (result.failed) {
+            process.abort();
+        } else {
+            cb(null);
+        }
+    })
+    .on('error', function () {
+        process.abort();
+    });
 });

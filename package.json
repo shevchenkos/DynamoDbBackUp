@@ -10,11 +10,28 @@
     "type": "git",
     "url": "https://github.com/Purple-Unicorns/DynamoDbBackUp"
   },
+  "keywords": [
+    "gulp",
+    "javascript",
+    "nodejs",
+    "plugin",
+    "aws",
+    "lambda",
+    "dynamodb",
+    "dynamodbstream",
+    "s3",
+    "restore",
+    "backup"
+  ],
   "dependencies": {
     "aws-sdk": "^2.4.7",
+    "lodash": "^4.13.1",
+    "yargs": "^4.6.0",
     "gulp": "^3.9.1",
     "gulp-jasmine": "^2.4.0",
-    "lodash": "^4.13.1",
-    "yargs": "^4.6.0"
+    "gulp-zip": "^3.2.0"
+  },
+  "devDependencies": {
+    "gulp-awslambda": "^0.3.0"
   }
 }

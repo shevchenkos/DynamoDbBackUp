@@ -64,6 +64,22 @@ gulp.task('backup-full', (cb) => {
         });
 });
 
+gulp.task('deploy-s3-bucket', (cb) => {
+    let config = {
+        S3Bucket: argv.s3bucket,
+        S3Region: argv.s3region
+    };
+
+    let deploy = new Deploy(config);
+    deploy.backupBucket()
+        .then(() => {
+            cb(null);
+        })
+        .catch(err => {
+            cb(err);
+        });
+});
+
 gulp.task('deploy-lambda', (cb) => {
     let config = {
         S3Bucket: argv.s3bucket,
@@ -75,20 +91,28 @@ gulp.task('deploy-lambda', (cb) => {
         LambdaRegion: argv.LambdaRegion,
         LambdaAlias: argv.LambdaAlias,
         LambdaRoleName: argv.LambdaRoleName
-
-        // S3Bucket: 'jobsheet.backup.us-east-1',
-        // S3Region: 'us-east-1',
-        // S3Prefix: 'test',
-        // DbTable: 'ImpoLite-dev',
-        // DbRegion: 'us-west-2',
-        // LambdaName: 'test1',
-        // LambdaRegion: 'us-west-2',
-        // LambdaAlias: 'dev',
-        // LambdaRoleName: 'backup-role'
     };
 
     let deploy = new Deploy(config);
     deploy.lambda()
+        .then(() => {
+            cb(null);
+        })
+        .catch(err => {
+            cb(err);
+        });
+});
+
+gulp.task('deploy-lambda-event', (cb) => {
+    let config = {      
+        DbTable: argv.dbtable,
+        DbRegion: argv.dbregion,
+        LambdaName: argv.LambdaName,
+        LambdaRegion: argv.LambdaRegion,      
+    };
+
+    let deploy = new Deploy(config);
+    deploy.lambdaEvent()
         .then(() => {
             cb(null);
         })

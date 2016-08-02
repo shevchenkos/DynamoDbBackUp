@@ -1,14 +1,15 @@
 # dynamodb-backup-restore
 
 This tool supports following functionality:
-1. Full backup AWS DynamoDb table to Amazon S3 bucket within or between regions.
-2. Incremental backup AWS DynamoDb table to Amazon S3 bucket within or between regions.
-3. AWS Lambda based incremental backup AWS DynamoDb  tableto Amazon S3 bucket within or between regions.
-4. Restore AWS DynamoDb table from Amazon S3 bucket within or between regions.
-5. Deploy and configure Amazon S3 backup bucket.
-6. Deploy, configure AWS Lambda and add event source.
+- Full backup AWS DynamoDb table to Amazon S3 bucket within or between regions.
+- Incremental backup AWS DynamoDb table to Amazon S3 bucket within or between regions.
+- AWS Lambda based incremental backup AWS DynamoDb  tableto Amazon S3 bucket within or between regions.
+- Restore AWS DynamoDb table from Amazon S3 bucket within or between regions.
+- Deploy and configure Amazon S3 backup bucket.
+- Deploy, configure AWS Lambda and add event source.
 
 Built on NodeJS calsses and ECMAScript 2015 (ES6).
+
 It can be used independently and as a dependency in your code.
 
 ## Usage samples

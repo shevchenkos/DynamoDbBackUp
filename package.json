@@ -1,7 +1,7 @@
 {
   "name": "dynamodb-backup-restore",
-  "version": "0.1.1",
-  "description": "AWS DynamoDb tool for full, incremental backup and restore",
+  "version": "0.1.2",
+  "description": "NPM package for Backup and Restore AWS DynamoDB",
   "homepage": "https://github.com/Purple-Unicorns/DynamoDbBackUp",
   "main": "index.js",
   "author": "Purple-Unicorns",

@@ -1,6 +1,5 @@
 'use strict';
 
-const AWS = require('aws-sdk');
 const config = require('./config');
 const Backup = require('dynamodb-backup-restore').Backup;
 

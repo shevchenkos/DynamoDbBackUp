@@ -1,7 +1,7 @@
 {
   "name": "dynamodb-backup-restore",
-  "version": "0.0.2",
-  "description": "AWS DynamoDb tool for full, incremental backup and restore",
+  "version": "0.1.3",
+  "description": "NPM package for Backup and Restore AWS DynamoDB",
   "homepage": "https://github.com/Purple-Unicorns/DynamoDbBackUp",
   "main": "index.js",
   "author": "Purple-Unicorns",
@@ -10,11 +10,29 @@
     "type": "git",
     "url": "https://github.com/Purple-Unicorns/DynamoDbBackUp"
   },
+  "keywords": [
+    "gulp",
+    "javascript",
+    "nodejs",
+    "plugin",
+    "aws",
+    "lambda",
+    "dynamo",
+    "dynamodb",
+    "dynamodbstream",
+    "s3",
+    "restore",
+    "backup"
+  ],
   "dependencies": {
-    "aws-sdk": "^2.4.7",
-    "gulp": "^3.9.1",
-    "gulp-jasmine": "^2.4.0",
     "lodash": "^4.13.1",
-    "yargs": "^4.6.0"
+    "node-zip": "^1.1.0",
+    "fs-extra": "^0.26.4"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.4.7",
+    "gulp-jasmine": "^2.4.0", 
+    "yargs": "^4.6.0",
+    "gulp": "^3.9.1"
   }
 }

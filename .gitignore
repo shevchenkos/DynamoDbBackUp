@@ -25,6 +25,7 @@ x86/
 build/
 bld/
 [Oo]bj/
+[Dd]ist/
 
 # Visual Studio 2015 cache/options directory
 .vs/
@@ -283,3 +284,5 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+config.json

@@ -104,11 +104,11 @@ gulp.task('deploy-lambda', (cb) => {
 });
 
 gulp.task('deploy-lambda-event', (cb) => {
-    let config = {      
+    let config = {
         DbTable: argv.dbtable,
         DbRegion: argv.dbregion,
         LambdaName: argv.lName,
-        LambdaRegion: argv.lRegion,      
+        LambdaRegion: argv.lRegion,
     };
 
     let deploy = new Deploy(config);
@@ -125,10 +125,10 @@ let process = require('process');
 
 gulp.task('unit-test', (cb) => {
     return gulp.src([
-        './tests/*.js'
+        './tests/**/*.test.js'
     ])
         .pipe(jasmine({
-            timeout: 40000,
+            timeout: 1000,
             verbose: true,
             integration: true,
             abortOnTestFailure: true

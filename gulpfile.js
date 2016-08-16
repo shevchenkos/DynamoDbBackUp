@@ -85,7 +85,6 @@ gulp.task('deploy-lambda', (cb) => {
         S3Bucket: argv.s3bucket,
         S3Prefix: argv.s3prefix,
         S3Region: argv.s3region,
-        DbTable: argv.dbtable,
         DbRegion: argv.dbregion,
         LambdaName: argv.lName,
         LambdaRegion: argv.lRegion,
@@ -109,6 +108,7 @@ gulp.task('deploy-lambda-event', (cb) => {
         DbRegion: argv.dbregion,
         LambdaName: argv.lName,
         LambdaRegion: argv.lRegion,
+        LambdaAlias: argv.lAlias
     };
 
     let deploy = new Deploy(config);

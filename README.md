@@ -132,12 +132,11 @@ deploy.backupBucket();
 
 ### Deploy AWS Lambda Function
 ```bash
-$ gulp deploy-lambda --s3bucket <bucket> --s3prefix <prefix> --s3region <region> --dbtable <table> --dbregion <region> --lName <lambdaName> --lRegion <region> --lAlias <lambdaAlias> --lRoleName <lambdaRole>
+$ gulp deploy-lambda --s3bucket <bucket> --s3prefix <prefix> --s3region <region> --dbregion <region> --lName <lambdaName> --lRegion <region> --lAlias <lambdaAlias> --lRoleName <lambdaRole>
 Options:
   --s3bucket  (required)  Amazon S3 backup bucket name 
   --s3prefix  (optional)  subfolder for backup(recomend use AWS DynamoDb table name) 
   --s3region  (required)  AWS Region for Amazon S3 backup bucket
-  --dbtable   (required)  AWS DynamoDb table name 
   --dbregion  (required)  AWS Region for AWS DynamoDb table
   --lName     (required)  AWS Lambda Function Name
   --lRegion   (required)  AWS Region for AWS Lambda Funtion 
@@ -152,7 +151,6 @@ let config = {
     S3Bucket:       'STRING_VALUE', /* required */
     S3Prefix:       'STRING_VALUE', /* optional */
     S3Region:       'STRING_VALUE', /* required */
-    DbTable:        'STRING_VALUE', /* required */
     DbRegion:       'STRING_VALUE', /* required */
     LambdaName:     'STRING_VALUE', /* required */
     LambdaRegion:   'STRING_VALUE', /* required */
@@ -165,12 +163,13 @@ deploy.lambda();
 
 ### Deploy AWS Lambda Event
 ```bash
-$ gulp deploy-lambda-event --dbtable <table> --dbregion <region> --lName <lambdaName> --lRegion <region>
+$ gulp deploy-lambda-event --dbtable <table> --dbregion <region> --lName <lambdaName> --lRegion <region> --lAlias <lambdaAlias>
 Options:
   --dbtable   (required)  AWS DynamoDb table name 
   --dbregion  (required)  AWS Region for AWS DynamoDb table
   --lName     (required)  AWS Lambda Function Name
   --lRegion   (required)  AWS Region for AWS Lambda Funtion 
+  --lAlias    (required)  AWS Lambda Function Alias
 ```
 
 ```javascript
@@ -180,7 +179,8 @@ let config = {
     DbTable:        'STRING_VALUE', /* required */
     DbRegion:       'STRING_VALUE', /* required */
     LambdaName:     'STRING_VALUE', /* required */
-    LambdaRegion:   'STRING_VALUE'  /* required */
+    LambdaRegion:   'STRING_VALUE', /* required */
+    LambdaAlias:    'STRING_VALUE'  /* required */
 };
 let deploy = new Deploy(config);
 deploy.lambdaEvent();

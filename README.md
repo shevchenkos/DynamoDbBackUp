@@ -1,5 +1,7 @@
 # dynamodb-backup-restore
 
+[![Build status](https://travis-ci.org/Purple-Unicorns/DynamoDbBackUp.svg?branch=master)](https://travis-ci.org/Purple-Unicorns/DynamoDbBackUp)
+
 This tool supports following functionality:
 - Full backup AWS DynamoDb table to Amazon S3 bucket within or between regions.
 - Incremental backup AWS DynamoDb table to Amazon S3 bucket within or between regions.

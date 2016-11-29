@@ -1,6 +1,6 @@
 {
   "name": "dynamodb-backup-restore",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "NPM package for Backup and Restore AWS DynamoDB",
   "homepage": "https://github.com/Purple-Unicorns/DynamoDbBackUp",
   "main": "index.js",

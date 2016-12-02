@@ -1,8 +1,8 @@
 {
   "name": "backup-lambda",
   "version": "0.0.1",
-  
+
   "dependencies": {
-    "dynamodb-backup-restore ": "git://github.com/snakelab/DynamoDbBackUp.git"
+    "dynamodb-backup-restore ": "0.2.6"
   }
 }

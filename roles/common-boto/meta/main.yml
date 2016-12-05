@@ -1,0 +1,20 @@
+---
+galaxy_info:
+  author: Hartmut Koenig
+  description: managing of using just one .boto config for aws
+  company: Haufe-Lexware
+  min_ansible_version: 1.9
+  platforms:
+  - name: Ubuntu
+    versions:
+    - all
+  - name: Debian
+    versions:
+    - all
+  - name: MacOSX
+    versions:
+      - all
+  categories:
+  - system
+
+dependencies: []

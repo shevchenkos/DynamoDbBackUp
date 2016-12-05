@@ -1,0 +1,7 @@
+- name: "common-boto"
+  src: "git+ssh://git@bitbucket.org/blueocean-ondemand/ansible-role-boto"
+  path: roles
+
+- name: "common-dynamodb"
+  src: "git+ssh://git@bitbucket.org/blueocean-ondemand/ansible-role-dynamodb"
+  path: roles

@@ -1,2 +1,0 @@
-env: daily
-aws_region: "{{ ansible_local.boto.ansible.aws_region }}"

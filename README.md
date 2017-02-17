@@ -19,10 +19,10 @@ It can be used independently and as a dependency in your code.
 ```bash
 $ gulp backup-full --s3bucket <bucket> --s3prefix <prefix> --s3region <region> --dbtable <table> --dbregion <region>
 Options:
-  --s3bucket  (required)  Amazon S3 backup bucket name 
-  --s3prefix  (optional)  subfolder for backup(recomend use AWS DynamoDb table name) 
+  --s3bucket  (required)  Amazon S3 backup bucket name
+  --s3prefix  (optional)  subfolder for backup(recomend use AWS DynamoDb table name)
   --s3region  (required)  AWS Region for Amazon S3 backup bucket
-  --dbtable   (required)  AWS DynamoDb table name 
+  --dbtable   (required)  AWS DynamoDb table name
   --dbregion  (required)  AWS Region for AWS DynamoDb table
 ```
 
@@ -44,10 +44,10 @@ backup.full();
 ```bash
 $ gulp backup-incremental --s3bucket <bucket> --s3prefix <prefix> --s3region <region> --dbtable <table> --dbregion <region>
 Options:
-  --s3bucket  (required)  Amazon S3 backup bucket name 
-  --s3prefix  (optional)  subfolder for backup(recomend use AWS DynamoDb table name) 
+  --s3bucket  (required)  Amazon S3 backup bucket name
+  --s3prefix  (optional)  subfolder for backup(recomend use AWS DynamoDb table name)
   --s3region  (required)  AWS Region for Amazon S3 backup bucket
-  --dbtable   (required)  AWS DynamoDb table name 
+  --dbtable   (required)  AWS DynamoDb table name
   --dbregion  (required)  AWS Region for AWS DynamoDb table
 ```
 
@@ -92,10 +92,10 @@ module.exports.handler = (event, context, callback) => {
 ```bash
 $ gulp restore --s3bucket <bucket> --s3prefix <prefix> --s3region <region> --dbtable <table> --dbregion <region>
 Options:
-  --s3bucket  (required)  Amazon S3 backup bucket name 
-  --s3prefix  (optional)  subfolder for backup(recomend use AWS DynamoDb table name) 
+  --s3bucket  (required)  Amazon S3 backup bucket name
+  --s3prefix  (optional)  subfolder for backup(recomend use AWS DynamoDb table name)
   --s3region  (required)  AWS Region for Amazon S3 backup bucket
-  --dbtable   (required)  AWS DynamoDb table name 
+  --dbtable   (required)  AWS DynamoDb table name
   --dbregion  (required)  AWS Region for AWS DynamoDb table
 ```
 
@@ -117,7 +117,7 @@ Restore(config);
 ```bash
 $ gulp deploy-s3-bucket --s3bucket <bucket> --s3region <region>
 Options:
-  --s3bucket  (required)  Amazon S3 backup bucket name 
+  --s3bucket  (required)  Amazon S3 backup bucket name
   --s3region  (required)  AWS Region for Amazon S3 backup bucket
 ```
 
@@ -136,28 +136,32 @@ deploy.backupBucket();
 ```bash
 $ gulp deploy-lambda --s3bucket <bucket> --s3prefix <prefix> --s3region <region> --dbregion <region> --lName <lambdaName> --lRegion <region> --lAlias <lambdaAlias> --lRoleName <lambdaRole>
 Options:
-  --s3bucket  (required)  Amazon S3 backup bucket name 
-  --s3prefix  (optional)  subfolder for backup(recomend use AWS DynamoDb table name) 
-  --s3region  (required)  AWS Region for Amazon S3 backup bucket
-  --dbregion  (required)  AWS Region for AWS DynamoDb table
-  --lName     (required)  AWS Lambda Function Name
-  --lRegion   (required)  AWS Region for AWS Lambda Funtion 
-  --lAlias    (required)  AWS Lambda Function Alias
-  --lRoleName (required)  AWS Lambda Function Execution Role
+  --s3bucket    (required)  Amazon S3 backup bucket name
+  --s3prefix    (optional)  subfolder for backup(recomend use AWS DynamoDb table name)
+  --s3region    (required)  AWS Region for Amazon S3 backup bucket
+  --dbregion    (required)  AWS Region for AWS DynamoDb table
+  --lName       (required)  AWS Lambda Function Name
+  --lRegion     (required)  AWS Region for AWS Lambda Funtion
+  --lAlias      (required)  AWS Lambda Function Alias
+  --lRoleName   (required)  AWS Lambda Function Execution Role
+  --lMemorySize (optional)  AWS Lambda MemorySize in MB (defaults to 128)
+  --lTimeout    (optional)  AWS Lambda Timeout in Seconds (defaults to 6)
 ```
 
 ```javascript
 const Deploy = require('dynamodb-backup-restore').Deploy;
 
 let config = {
-    S3Bucket:       'STRING_VALUE', /* required */
-    S3Prefix:       'STRING_VALUE', /* optional */
-    S3Region:       'STRING_VALUE', /* required */
-    DbRegion:       'STRING_VALUE', /* required */
-    LambdaName:     'STRING_VALUE', /* required */
-    LambdaRegion:   'STRING_VALUE', /* required */
-    LambdaAlias:    'STRING_VALUE', /* required */
-    LambdaRoleName: 'STRING_VALUE'  /* required */
+    S3Bucket:         'STRING_VALUE', /* required */
+    S3Prefix:         'STRING_VALUE', /* optional */
+    S3Region:         'STRING_VALUE', /* required */
+    DbRegion:         'STRING_VALUE', /* required */
+    LambdaName:       'STRING_VALUE', /* required */
+    LambdaRegion:     'STRING_VALUE', /* required */
+    LambdaAlias:      'STRING_VALUE', /* required */
+    LambdaRoleName:   'STRING_VALUE', /* required */
+    LambdaMemorySize: 'STRING_VALUE', /* optional */
+    LambdaTimeout:    'STRING_VALUE'  /* optional */  
 };
 let deploy = new Deploy(config);
 deploy.lambda();
@@ -167,10 +171,10 @@ deploy.lambda();
 ```bash
 $ gulp deploy-lambda-event --dbtable <table> --dbregion <region> --lName <lambdaName> --lRegion <region> --lAlias <lambdaAlias>
 Options:
-  --dbtable   (required)  AWS DynamoDb table name 
+  --dbtable   (required)  AWS DynamoDb table name
   --dbregion  (required)  AWS Region for AWS DynamoDb table
   --lName     (required)  AWS Lambda Function Name
-  --lRegion   (required)  AWS Region for AWS Lambda Funtion 
+  --lRegion   (required)  AWS Region for AWS Lambda Funtion
   --lAlias    (required)  AWS Lambda Function Alias
 ```
 

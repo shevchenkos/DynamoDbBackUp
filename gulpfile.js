@@ -89,7 +89,9 @@ gulp.task('deploy-lambda', (cb) => {
         LambdaName: argv.lName,
         LambdaRegion: argv.lRegion,
         LambdaAlias: argv.lAlias,
-        LambdaRoleName: argv.lRoleName
+        LambdaRoleName: argv.lRoleName,
+        LambdaMemorySize: argv.lMemorySize || 128,
+        LambdaTimeout: argv.lTimeout || 6
     };
 
     let deploy = new Deploy(config);

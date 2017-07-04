@@ -3,6 +3,6 @@
   "version": "0.0.1",
   
   "dependencies": {
-    "dynamodb-backup-restore ": "0.2.13"
+    "dynamodb-backup-restore ": "0.2.15"
   }
 }

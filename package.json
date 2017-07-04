@@ -2,13 +2,13 @@
   "name": "dynamodb-backup-restore",
   "version": "0.2.15",
   "description": "NPM package for Backup and Restore AWS DynamoDB",
-  "homepage": "https://github.com/Purple-Unicorns/DynamoDbBackUp",
+  "homepage": "https://github.com/shevchenkos/DynamoDbBackUp",
   "main": "index.js",
-  "author": "Purple-Unicorns",
+  "author": "shevchenkos",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Purple-Unicorns/DynamoDbBackUp"
+    "url": "https://github.com/shevchenkos/DynamoDbBackUp"
   },
   "keywords": [
     "gulp",

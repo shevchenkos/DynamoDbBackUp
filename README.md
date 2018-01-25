@@ -2,10 +2,10 @@
 
 [![Build status](https://travis-ci.org/shevchenkos/DynamoDbBackUp.svg?branch=master)](https://travis-ci.org/shevchenkos/DynamoDbBackUp)
 
-This tool supports following functionality:
-- Full backup AWS DynamoDb table to Amazon S3 bucket within or between regions.
-- Incremental backup AWS DynamoDb table to Amazon S3 bucket within or between regions.
-- AWS Lambda based incremental backup AWS DynamoDb  table to Amazon S3 bucket within or between regions.
+This tool supports the following functionality:
+- Full backup of AWS DynamoDb table to Amazon S3 bucket within or between regions.
+- Incremental backup of AWS DynamoDb table to Amazon S3 bucket within or between regions.
+- AWS Lambda based incremental backup of AWS DynamoDb table to Amazon S3 bucket within or between regions.
 - Restore AWS DynamoDb table from Amazon S3 bucket within or between regions.
 - Deploy and configure Amazon S3 backup bucket.
 - Deploy, configure AWS Lambda and add event source.
@@ -20,7 +20,7 @@ It can be used independently and as a dependency in your code.
 $ gulp backup-full --s3bucket <bucket> --s3prefix <prefix> --s3region <region> --dbtable <table> --dbregion <region>
 Options:
   --s3bucket  (required)  Amazon S3 backup bucket name
-  --s3prefix  (optional)  subfolder for backup(recomend use AWS DynamoDb table name)
+  --s3prefix  (optional)  subfolder for backup (recommend use AWS DynamoDb table name)
   --s3region  (required)  AWS Region for Amazon S3 backup bucket
   --dbtable   (required)  AWS DynamoDb table name
   --dbregion  (required)  AWS Region for AWS DynamoDb table
@@ -45,7 +45,7 @@ backup.full();
 $ gulp backup-incremental --s3bucket <bucket> --s3prefix <prefix> --s3region <region> --dbtable <table> --dbregion <region>
 Options:
   --s3bucket  (required)  Amazon S3 backup bucket name
-  --s3prefix  (optional)  subfolder for backup(recomend use AWS DynamoDb table name)
+  --s3prefix  (optional)  subfolder for backup (recommend use AWS DynamoDb table name)
   --s3region  (required)  AWS Region for Amazon S3 backup bucket
   --dbtable   (required)  AWS DynamoDb table name
   --dbregion  (required)  AWS Region for AWS DynamoDb table
@@ -92,11 +92,12 @@ module.exports.handler = (event, context, callback) => {
 ```bash
 $ gulp restore --s3bucket <bucket> --s3prefix <prefix> --s3region <region> --dbtable <table> --dbregion <region>
 Options:
-  --s3bucket  (required)  Amazon S3 backup bucket name
-  --s3prefix  (optional)  subfolder for backup(recomend use AWS DynamoDb table name)
-  --s3region  (required)  AWS Region for Amazon S3 backup bucket
-  --dbtable   (required)  AWS DynamoDb table name
-  --dbregion  (required)  AWS Region for AWS DynamoDb table
+  --s3bucket     (required)  Amazon S3 backup bucket name
+  --s3prefix     (optional)  subfolder for backup(recomend use AWS DynamoDb table name)
+  --s3region     (required)  AWS Region for Amazon S3 backup bucket
+  --dbtable      (required)  AWS DynamoDb table name
+  --dbregion     (required)  AWS Region for AWS DynamoDb table
+  --restoretime  (required)  JavaScript timestamp of when to restore to
 ```
 
 ```javascript
@@ -137,7 +138,7 @@ deploy.backupBucket();
 $ gulp deploy-lambda --s3bucket <bucket> --s3prefix <prefix> --s3region <region> --dbregion <region> --lName <lambdaName> --lRegion <region> --lAlias <lambdaAlias> --lRoleName <lambdaRole>
 Options:
   --s3bucket    (required)  Amazon S3 backup bucket name
-  --s3prefix    (optional)  subfolder for backup(recomend use AWS DynamoDb table name)
+  --s3prefix    (optional)  subfolder for backup (recommend use AWS DynamoDb table name)
   --s3region    (required)  AWS Region for Amazon S3 backup bucket
   --dbregion    (required)  AWS Region for AWS DynamoDb table
   --lName       (required)  AWS Lambda Function Name

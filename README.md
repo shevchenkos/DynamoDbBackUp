@@ -30,11 +30,12 @@ Options:
 const Backup = require('dynamodb-backup-restore').Backup;
 
 let config = {
-    S3Bucket: 'STRING_VALUE', /* required */
-    S3Prefix: 'STRING_VALUE', /* optional */
-    S3Region: 'STRING_VALUE', /* required */
-    DbTable:  'STRING_VALUE', /* required */
-    DbRegion: 'STRING_VALUE'  /* required */
+    S3Bucket:     'STRING_VALUE', /* required */
+    S3Prefix:     'STRING_VALUE', /* optional */
+    S3Encryption: 'STRING_VALUE', /* optional */
+    S3Region:     'STRING_VALUE', /* required */
+    DbTable:      'STRING_VALUE', /* required */
+    DbRegion:     'STRING_VALUE'  /* required */
 };
 let backup = new Backup(config);
 backup.full();
@@ -55,11 +56,12 @@ Options:
 const Backup = require('dynamodb-backup-restore').Backup;
 
 let config = {
-    S3Bucket: 'STRING_VALUE', /* required */
-    S3Prefix: 'STRING_VALUE', /* optional */
-    S3Region: 'STRING_VALUE', /* required */
-    DbTable:  'STRING_VALUE', /* required */
-    DbRegion: 'STRING_VALUE'  /* required */
+    S3Bucket:     'STRING_VALUE', /* required */
+    S3Prefix:     'STRING_VALUE', /* optional */
+    S3Encryption: 'STRING_VALUE', /* optional */
+    S3Region:     'STRING_VALUE', /* required */
+    DbTable:      'STRING_VALUE', /* required */
+    DbRegion:     'STRING_VALUE'  /* required */
 };
 let backup = new Backup(config);
 backup.incremental();

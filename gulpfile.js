@@ -30,6 +30,7 @@ gulp.task('backup-incremental', (cb) => {
     let config = {
         S3Bucket: argv.s3bucket,
         S3Prefix: argv.s3prefix,
+        S3Encryption: argv.s3encryption,
         S3Region: argv.s3region,
         DbTable: argv.dbtable,
         DbRegion: argv.dbregion
@@ -49,6 +50,7 @@ gulp.task('backup-full', (cb) => {
     let config = {
         S3Bucket: argv.s3bucket,
         S3Prefix: argv.s3prefix,
+        S3Encryption: argv.s3encryption,
         S3Region: argv.s3region,
         DbTable: argv.dbtable,
         DbRegion: argv.dbregion

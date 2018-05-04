@@ -19,22 +19,24 @@ It can be used independently and as a dependency in your code.
 ```bash
 $ gulp backup-full --s3bucket <bucket> --s3prefix <prefix> --s3region <region> --dbtable <table> --dbregion <region>
 Options:
-  --s3bucket  (required)  Amazon S3 backup bucket name
-  --s3prefix  (optional)  subfolder for backup (recommend use AWS DynamoDb table name)
-  --s3region  (required)  AWS Region for Amazon S3 backup bucket
-  --dbtable   (required)  AWS DynamoDb table name
-  --dbregion  (required)  AWS Region for AWS DynamoDb table
+  --s3bucket      (required)  Amazon S3 backup bucket name
+  --s3prefix      (optional)  subfolder for backup (recommend use AWS DynamoDb table name)
+  --s3encryption  (optional)  AES256 (default) or aws:kms
+  --s3region      (required)  AWS Region for Amazon S3 backup bucket
+  --dbtable       (required)  AWS DynamoDb table name
+  --dbregion      (required)  AWS Region for AWS DynamoDb table
 ```
 
 ```javascript
 const Backup = require('dynamodb-backup-restore').Backup;
 
 let config = {
-    S3Bucket: 'STRING_VALUE', /* required */
-    S3Prefix: 'STRING_VALUE', /* optional */
-    S3Region: 'STRING_VALUE', /* required */
-    DbTable:  'STRING_VALUE', /* required */
-    DbRegion: 'STRING_VALUE'  /* required */
+    S3Bucket:     'STRING_VALUE', /* required */
+    S3Prefix:     'STRING_VALUE', /* optional */
+    S3Encryption: 'STRING_VALUE', /* optional */
+    S3Region:     'STRING_VALUE', /* required */
+    DbTable:      'STRING_VALUE', /* required */
+    DbRegion:     'STRING_VALUE'  /* required */
 };
 let backup = new Backup(config);
 backup.full();
@@ -44,22 +46,24 @@ backup.full();
 ```bash
 $ gulp backup-incremental --s3bucket <bucket> --s3prefix <prefix> --s3region <region> --dbtable <table> --dbregion <region>
 Options:
-  --s3bucket  (required)  Amazon S3 backup bucket name
-  --s3prefix  (optional)  subfolder for backup (recommend use AWS DynamoDb table name)
-  --s3region  (required)  AWS Region for Amazon S3 backup bucket
-  --dbtable   (required)  AWS DynamoDb table name
-  --dbregion  (required)  AWS Region for AWS DynamoDb table
+  --s3bucket      (required)  Amazon S3 backup bucket name
+  --s3prefix      (optional)  subfolder for backup (recommend use AWS DynamoDb table name)
+  --s3encryption  (optional)  AES256 (default) or aws:kms
+  --s3region      (required)  AWS Region for Amazon S3 backup bucket
+  --dbtable       (required)  AWS DynamoDb table name
+  --dbregion      (required)  AWS Region for AWS DynamoDb table
 ```
 
 ```javascript
 const Backup = require('dynamodb-backup-restore').Backup;
 
 let config = {
-    S3Bucket: 'STRING_VALUE', /* required */
-    S3Prefix: 'STRING_VALUE', /* optional */
-    S3Region: 'STRING_VALUE', /* required */
-    DbTable:  'STRING_VALUE', /* required */
-    DbRegion: 'STRING_VALUE'  /* required */
+    S3Bucket:     'STRING_VALUE', /* required */
+    S3Prefix:     'STRING_VALUE', /* optional */
+    S3Encryption: 'STRING_VALUE', /* optional */
+    S3Region:     'STRING_VALUE', /* required */
+    DbTable:      'STRING_VALUE', /* required */
+    DbRegion:     'STRING_VALUE'  /* required */
 };
 let backup = new Backup(config);
 backup.incremental();

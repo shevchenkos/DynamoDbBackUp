@@ -73,6 +73,8 @@ backup.incremental();
 
 The DynamoDB Stream StreamViewType needs to be one of `NEW_IMAGE`, `NEW_AND_OLD_IMAGES`, or `KEYS_ONLY`.
 
+Note that [DynamoDB Streams does not support encryption at rest](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/encryption-before-you-start.html).
+
 ```javascript
 const Backup = require('dynamodb-backup-restore').Backup;
 

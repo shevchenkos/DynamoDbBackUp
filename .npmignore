@@ -1,0 +1,5 @@
+.git/
+.gitattributes
+yarn.lock
+.travis/
+.travis.yml

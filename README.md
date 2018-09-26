@@ -70,6 +70,11 @@ backup.incremental();
 ```
 
 ### AWS Lambda based incremental backup
+
+The DynamoDB Stream StreamViewType needs to be one of `NEW_IMAGE`, `NEW_AND_OLD_IMAGES`, or `KEYS_ONLY`.
+
+Note that [DynamoDB Streams does not support encryption at rest](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/encryption-before-you-start.html).
+
 ```javascript
 const Backup = require('dynamodb-backup-restore').Backup;
 
@@ -79,9 +84,12 @@ module.exports.handler = (event, context, callback) => {
     }
     else {
         let config = {
-            S3Bucket: 'STRING_VALUE', /* required */
-            S3Region: 'STRING_VALUE', /* required */
-            S3Prefix: 'STRING_VALUE'  /* optional */
+            S3Bucket:     'STRING_VALUE', /* required */
+            S3Region:     'STRING_VALUE', /* required */
+            S3Encryption: 'STRING_VALUE', /* optional */
+            S3Prefix:     'STRING_VALUE', /* optional */
+            DbTable:      'STRING_VALUE', /* required if stream is KEYS_ONLY, ignored otherwise */
+            DbRegion:     'STRING_VALUE', /* required if stream is KEYS_ONLY, ignored otherwise */
         };
         let backup = new Backup(config);
         backup.fromDbStream(event.Records).then(() => {

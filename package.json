@@ -25,9 +25,10 @@
     "backup"
   ],
   "dependencies": {
+    "fs-extra": "^0.26.4",
     "lodash": "^4.13.1",
     "node-zip": "^1.1.0",
-    "fs-extra": "^0.26.4"
+    "proxy-agent": "^3.1.0"
   },
   "devDependencies": {
     "aws-sdk": "^2.4.7",

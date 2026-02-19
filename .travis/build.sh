@@ -1,3 +1,3 @@
-echo "build.ch executing..."
+echo "build.sh executing..."
 npm install
 gulp unit-test

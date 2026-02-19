@@ -1,6 +1,6 @@
 {
   "name": "dynamodb-backup-restore",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "NPM package for Backup and Restore AWS DynamoDB",
   "homepage": "https://github.com/shevchenkos/DynamoDbBackUp",
   "main": "index.js",
@@ -25,14 +25,22 @@
     "backup"
   ],
   "dependencies": {
-    "lodash": "^4.13.1",
-    "node-zip": "^1.1.0",
-    "fs-extra": "^0.26.4"
+    "lodash": "^4.17.21",
+    "node-zip": "^1.1.1",
+    "fs-extra": "^11.1.1"
   },
   "devDependencies": {
-    "aws-sdk": "^2.4.7",
-    "gulp": "^4.0.0",
-    "gulp-jasmine": "^2.4.0",
-    "yargs": "^4.6.0"
+    "aws-sdk": "^2.1691.0",
+    "eslint": "^8.57.0",
+    "gulp": "^4.0.2",
+    "gulp-jasmine": "^2.4.2",
+    "yargs": "^17.7.2"
+  },
+  "scripts": {
+    "lint": "eslint lib/**/*.js lambda/**/*.js *.js",
+    "test": "gulp unit-test"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

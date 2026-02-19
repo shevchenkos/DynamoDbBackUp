@@ -14,6 +14,18 @@ Built on NodeJS classes and ECMAScript 2015 (ES6).
 
 It can be used independently and as a dependency in your code.
 
+## Requirements
+
+- Node.js >= 18.0.0
+- AWS credentials configured (via environment variables, IAM role, or credentials file)
+
+## Features
+
+- **Input Validation**: Comprehensive validation of AWS regions, bucket names, and table names
+- **Automatic Retry**: Built-in exponential backoff retry logic for transient AWS errors
+- **Security**: Least-privilege IAM policies and secure S3 bucket configurations
+- **Error Handling**: Improved error messages with context
+
 ## Usage samples
 ### Full backup
 ```bash
@@ -80,36 +92,37 @@ const Backup = require('dynamodb-backup-restore').Backup;
 
 module.exports.handler = (event, context, callback) => {
     if (!event.Records) {
-        callback('There are no items to process.');
+        return callback(new Error('There are no items to process.'));
     }
-    else {
-        let config = {
-            S3Bucket:     'STRING_VALUE', /* required */
-            S3Region:     'STRING_VALUE', /* required */
-            S3Encryption: 'STRING_VALUE', /* optional */
-            S3Prefix:     'STRING_VALUE', /* optional */
-            DbTable:      'STRING_VALUE', /* required if stream is KEYS_ONLY, ignored otherwise */
-            DbRegion:     'STRING_VALUE', /* required if stream is KEYS_ONLY, ignored otherwise */
-        };
-        let backup = new Backup(config);
-        backup.fromDbStream(event.Records).then(() => {
-            callback();
-        }).catch(err => {
-            callback(err);
-        });
-    }
+    
+    let config = {
+        S3Bucket:     'STRING_VALUE', /* required */
+        S3Region:     'STRING_VALUE', /* required */
+        S3Encryption: 'STRING_VALUE', /* optional */
+        S3Prefix:     'STRING_VALUE', /* optional */
+        DbTable:      'STRING_VALUE', /* required if stream is KEYS_ONLY, ignored otherwise */
+        DbRegion:     'STRING_VALUE', /* required if stream is KEYS_ONLY, ignored otherwise */
+    };
+    let backup = new Backup(config);
+    backup.fromDbStream(event.Records).then(() => {
+        callback(null);
+    }).catch(err => {
+        callback(err);
+    });
 }
 ```
+
+**Note:** Lambda functions deployed using this tool use Node.js 18.x runtime.
 ### Restore
 ```bash
 $ gulp restore --s3bucket <bucket> --s3prefix <prefix> --s3region <region> --dbtable <table> --dbregion <region>
 Options:
   --s3bucket     (required)  Amazon S3 backup bucket name
-  --s3prefix     (optional)  subfolder for backup(recomend use AWS DynamoDb table name)
+  --s3prefix     (optional)  subfolder for backup (recommend use AWS DynamoDb table name)
   --s3region     (required)  AWS Region for Amazon S3 backup bucket
   --dbtable      (required)  AWS DynamoDb table name
   --dbregion     (required)  AWS Region for AWS DynamoDb table
-  --restoretime  (required)  JavaScript timestamp of when to restore to
+  --restoretime  (optional)  JavaScript timestamp of when to restore to (defaults to latest)
 ```
 
 ```javascript
@@ -204,3 +217,15 @@ let config = {
 let deploy = new Deploy(config);
 deploy.lambdaEvent();
 ```
+
+## Error Handling
+
+All configuration objects are validated before operations begin. Invalid configurations will throw descriptive errors indicating which fields are missing or invalid.
+
+AWS operations automatically retry on transient errors (throttling, network issues, service unavailability) with exponential backoff up to 3 retries.
+
+## Security
+
+- S3 buckets are created with private ACL (not publicly accessible)
+- Lambda IAM roles use least-privilege policies with specific resource ARNs
+- Input validation prevents invalid AWS resource names and regions
